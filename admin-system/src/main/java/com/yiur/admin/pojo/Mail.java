@@ -34,4 +34,5 @@ public class Mail implements Serializable {
     this.user = new User(uid);
     this.message = new Message(mid);
   }
+
 }

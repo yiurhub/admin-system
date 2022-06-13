@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ServiceAspect {
 
-    @Pointcut("execution(public * com.yiur.admin.service.*.*(..))")
-    public void pointcut() {
-    }
-
-
-    @Before("pointcut()")
-    public void deBefore(JoinPoint joinpoint) {
-    }
+//    @Pointcut("execution(public * com.yiur.admin.service.UserService.*(..))")
+//    public void pointcut() {
+//    }
+//
+//
+//    @Before("pointcut()")
+//    public void deBefore(JoinPoint joinpoint) {
+//    }
 
 }

@@ -10,7 +10,11 @@
         <!--开启下划线映射-->
         <!--<setting name="mapUnderscoreToCamelCase" value="true" />-->
         <!--开启日志-->
-        <setting name="logImpl" value="com.yiur.admin.log.AdminSql"/>
+        <setting name="logImpl" value="com.yiur.admin.log.MybatisSqlLog"/>
     </settings>
+
+    <plugins>
+        <plugin interceptor="com.yiur.admin.plugin.MybatisSqlPlugin"></plugin>
+    </plugins>
 
 </configuration>

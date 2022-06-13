@@ -22,6 +22,8 @@ public class Page implements Serializable {
     private int pageIndex;
     @ApiModelProperty("显示数量")
     private int pageCount;
+    @ApiModelProperty("页行数")
+    private int pageRow;
     @ApiModelProperty("页总数")
     private int pageTotal;
     @ApiModelProperty("模糊查询")

@@ -6,6 +6,7 @@ import com.yiur.admin.service.PermsService;
 import org.func.spring.boot.annotation.FuncBean;
 import org.func.spring.boot.annotation.FuncLambda;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,7 @@ import java.util.List;
  */
 @Service
 @FuncBean
-@Transactional()
+@Transactional(rollbackFor = { Exception.class })
 public class PermsServiceImpl implements PermsService {
 
     /**

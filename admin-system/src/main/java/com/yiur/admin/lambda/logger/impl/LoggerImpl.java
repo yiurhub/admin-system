@@ -19,6 +19,12 @@ public class LoggerImpl implements Logger {
     }
 
     @Override
+    @FuncLogger(name = "admin-login")
+    @FuncLambda(value = Logger.class, bean = "info")
+    public void info(String message, Object... args) {
+    }
+
+    @Override
     public void debug(String message) {
     }
 

@@ -18,7 +18,7 @@ import java.util.List;
  */
 @Service
 @FuncBean
-@Transactional()
+@Transactional(rollbackFor = { Exception.class })
 public class MailServiceImpl implements MailService {
 
     /**

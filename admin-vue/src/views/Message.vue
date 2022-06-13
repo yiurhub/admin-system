@@ -148,7 +148,7 @@ const onSubmit = () => {
       message.validDate = moment(message.validDate).format(dateFormat.value);
       http({
         url: '/api/msg/send',
-        method: 'post',
+        method: 'put',
         data: message
       }).then((resp) => {
         if (resp !== 1) {

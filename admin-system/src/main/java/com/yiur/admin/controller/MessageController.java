@@ -12,10 +12,7 @@ import com.yiur.admin.utils.TaskUtil;
 import io.swagger.annotations.ApiOperation;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -44,7 +41,7 @@ public class MessageController {
      * @return int
      */
     @ApiOperation("发送消息")
-    @PostMapping("/send")
+    @PutMapping("/send")
     public int sendMessage(@RequestBody Message message) {
         message.setIdentity(UUID.randomUUID().toString());
         if (messageService.sendMessage(message) == 1) {

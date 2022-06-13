@@ -76,11 +76,28 @@
         where deleted = false
     </select>
 
-    <select id="queryByPage" resultType="com.yiur.admin.pojo.User">
-        call user_query(#{index}, #{count}, #{like})
+    <select id="queryByPage" resultType="user" parameterType="page">
+        <choose>
+            <when test="pageLike != null or pageLink != ''">
+                select uid, username, password, name, face, address, `desc`, registerDate, lastLoginDate, lastLoginAddress, perms
+                from user
+                where username
+                like #{pageLike}
+                and deleted = false
+                order by uid
+                limit #{pageRow}, #{pageCount};
+            </when>
+            <otherwise>
+                select uid, username, password, name, face, address, `desc`, registerDate, lastLoginDate, lastLoginAddress, perms
+                from user
+                where deleted = false
+                order by uid
+                limit #{pageRow}, #{pageCount};
+            </otherwise>
+        </choose>
     </select>
 
-    <select id="getTotal" resultType="java.lang.Integer">
+    <select id="getTotal" resultType="int">
         <choose>
             <when test="like != null">
                 select count(*) from user where username like #{like} and deleted = false

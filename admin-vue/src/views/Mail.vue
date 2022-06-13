@@ -188,13 +188,13 @@ const emptyRecycleBin = (list) => {
 const deleteMail = (url, data) => {
   return http({
     url: `${url}/${data}`,
-    method: 'get'
+    method: 'delete'
   });
 }
 const deleteMailList = (url, data) => {
   return http({
     url: url,
-    method: 'post',
+    method: 'delete',
     data: data
   });
 }

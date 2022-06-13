@@ -168,7 +168,7 @@ const onSubmit = () => {
 // 修改用户
 const editUser = () => {
   http({
-    url: '/api/user/set/user',
+    url: '/api/user/update',
     method: 'post',
     data: {
       uid: user.uid,

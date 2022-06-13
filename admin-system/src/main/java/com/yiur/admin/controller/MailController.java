@@ -64,7 +64,7 @@ public class MailController {
      * @return int
      */
     @ApiOperation("删除邮件")
-    @GetMapping("/delete/{mailId}")
+    @DeleteMapping("/delete/{mailId}")
     public int deleteMail(@PathVariable("mailId") int mailId) {
         if (mailService.delete(mailId) != 1) {
             return Result.ERROR.state;
@@ -79,7 +79,7 @@ public class MailController {
      * @return int
      */
     @ApiOperation("根据集合删除邮件")
-    @PostMapping("/delete/list")
+    @DeleteMapping("/delete/list")
     public int deleteMailByList(@RequestBody List<Mail> list) {
         boolean result = true;
         for (Mail mail : list) {

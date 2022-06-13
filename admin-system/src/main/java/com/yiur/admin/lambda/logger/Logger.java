@@ -11,6 +11,13 @@ public interface Logger {
      * @param message 日志消息
      */
     void info(String message);
+
+    /**
+     * 输出普通的日志
+     * @param message 日志消息
+     * @param args format
+     */
+    void info(String message, Object... args);
     /**
      * 输出调试的日志
      * @param message 日志消息

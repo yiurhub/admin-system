@@ -1,6 +1,7 @@
 package com.yiur.admin.service.impl;
 
 import com.yiur.admin.mapper.UserMapper;
+import com.yiur.admin.pojo.Page;
 import com.yiur.admin.pojo.User;
 import com.yiur.admin.service.UserService;
 import org.func.spring.boot.annotation.FuncBean;
@@ -23,8 +24,8 @@ import static org.func.spring.boot.utils.StringUtil.format;
  */
 @Service
 @FuncBean
-@Transactional()
 @CacheConfig(cacheNames = "user")
+@Transactional(rollbackFor = { Exception.class })
 public class UserServiceImpl implements UserService {
 
     /**
@@ -74,16 +75,16 @@ public class UserServiceImpl implements UserService {
     /**
      * 获取分页用户数据
      *
-     * @param index 当前页数
-     * @param count 显示数量
-     * @param like  模糊查询
+     * @param page 分页参数
      * @return list
      */
     @Override
-    @Cacheable(key = "'user_cache' + (#like.equals('') ? '' : '_' + #like) + '_' + #index")
+    @Cacheable(key = "'user_cache' + (#page.pageLike.equals('') ? '' : '_' + #page.pageLike) + '_' + #page.pageIndex")
     @FuncLambda(classFile = UserService.class, refs = { "service", "watch-log" })
-    public List<User> queryByPage(@FuncParameter("index") int index, @FuncParameter("count") int count, @FuncParameter("like") String like) {
-        return userMapper.queryByPage(index, count, format("%?%", like));
+    public List<User> queryByPage(@FuncParameter("page") Page page) {
+        page.setPageLike("%" + page.getPageLike() + "%");
+        page.setPageRow((page.getPageIndex() - 1) * page.getPageCount());
+        return userMapper.queryByPage(page);
     }
 
     /**

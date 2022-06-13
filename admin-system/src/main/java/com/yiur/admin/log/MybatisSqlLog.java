@@ -7,7 +7,7 @@ import org.apache.ibatis.logging.Log;
 /**
  * @author Yiur
  */
-public class AdminSql implements Log {
+public class MybatisSqlLog implements Log {
 
     private final String clazz;
 
@@ -33,7 +33,7 @@ public class AdminSql implements Log {
             if (AdminSystemApplication.context != null && logger == null) {
                 synchronized (LoggerBuilder.class) {
                     if (AdminSystemApplication.context != null && logger == null) {
-                        logger = AdminSystemApplication.context.getBean(Logger.class);
+                        logger = (Logger) AdminSystemApplication.context.getBean("loggerImpl");
                     }
                 }
             }
@@ -58,13 +58,9 @@ public class AdminSql implements Log {
 
     }
 
-    public AdminSql(String clazz) {
+    public MybatisSqlLog(String clazz) {
         this.clazz = clazz;
         this.loggerBuilder = new LoggerBuilder();
-    }
-
-    public String getClazz() {
-        return clazz;
     }
 
     public LoggerBuilder getLoggerBuilder() {

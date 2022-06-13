@@ -60,7 +60,7 @@ public class UserController {
      * @return int
      */
     @ApiOperation("添加用户")
-    @PostMapping("/add/user")
+    @PutMapping("/add")
     public int addUser(@RequestBody User user) {
         return userService.insert(user);
     }
@@ -82,7 +82,7 @@ public class UserController {
     @ApiOperation("获取用户分页数据")
     @PostMapping("/get/page")
     public List<User> getUsersByPage(@RequestBody Page page) {
-        return setUserOnline(userService.queryByPage(page.getPageIndex(), page.getPageCount(), page.getPageLike()));
+        return setUserOnline(userService.queryByPage(page));
     }
 
     /**
@@ -113,7 +113,7 @@ public class UserController {
      * @return int
      */
     @ApiOperation("修改用户信息")
-    @PostMapping("/set/user")
+    @PostMapping("/update")
     public int updateUser(@RequestBody User user) {
         if (userService.update(user) == 1) {
             if (webSocketMap.get(root) != null) {
@@ -126,20 +126,23 @@ public class UserController {
     }
 
     /**
-     * 修改用户信息
-     * @param user 用户信息
+     * 修改集合用户信息
+     * @param users 集合用户信息
      * @return int
      */
-    @ApiOperation("修改用户权限")
-    @PostMapping("/set/list/user")
-    public int updateListUser(@RequestBody User user) {
-        if (userService.update(user) == 1) {
-            if (webSocketMap.get(user.getUsername()) != null) {
-                webSocketMap.get(user.getUsername()).sendMessage("RELOAD");
+    @ApiOperation("修改集合用户")
+    @PostMapping("/update/list")
+    public int updateListUser(@RequestBody List<User> users) {
+        int result = Result.ERROR.state;
+        for (User user : users) {
+            if (userService.update(user) == 1) {
+                if (webSocketMap.get(user.getUsername()) != null) {
+                    webSocketMap.get(user.getUsername()).sendMessage("RELOAD");
+                }
+                result = Result.OK.state;
             }
-            return Result.OK.state;
         }
-        return Result.ERROR.state;
+        return result;
     }
 
     /**
@@ -148,7 +151,7 @@ public class UserController {
      * @return int
      */
     @ApiOperation("删除用户")
-    @GetMapping("/delete/{uid}")
+    @DeleteMapping("/delete/{uid}")
     public int deleteUser(@PathVariable("uid") int uid) {
         return userService.delete(uid);
     }

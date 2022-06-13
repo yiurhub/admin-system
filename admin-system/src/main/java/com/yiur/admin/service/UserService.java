@@ -1,5 +1,6 @@
 package com.yiur.admin.service;
 
+import com.yiur.admin.pojo.Page;
 import com.yiur.admin.pojo.User;
 
 import java.util.List;
@@ -33,12 +34,10 @@ public interface UserService {
 
     /**
      * 获取分页用户数据
-     * @param index 当前页数
-     * @param count 显示数量
-     * @param like 模糊查询
+     * @param page 分页参数
      * @return list
      */
-    List<User> queryByPage(int index, int count, String like);
+    List<User> queryByPage(Page page);
 
     /**
      * 查询全部用户

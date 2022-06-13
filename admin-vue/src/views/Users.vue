@@ -278,7 +278,7 @@ const handleDelete = (index: number, row: User) => {
     confirm("警告", "确认删除吗?", () => {
       http({
         url: `/api/user/delete/${row.uid}`,
-        method: 'get'
+        method: 'delete'
       }).then((resp: number) => {
         if (resp !== 1) {
           ElMessage.error("删除失败");
@@ -408,15 +408,9 @@ const addUser = () => {
       return false;
     } else {
       http({
-        url: '/api/user/add/user',
-        data: {
-          name: addForm.name,
-          perms: addForm.perms,
-          username: addForm.username,
-          password: addForm.password,
-          address: addForm.address
-        },
-        method: 'post'
+        url: '/api/user/add',
+        data: addForm,
+        method: 'put'
       }).then((resp) => {
         if (resp === 1) {
           closeAdd();
@@ -457,8 +451,8 @@ const saveEdit = () => {
       return false;
     } else {
       http({
-        url: '/api/user/set/list/user',
-        data: editForm,
+        url: '/api/user/update/list',
+        data: [ editForm ],
         method: 'post'
       }).then((resp) => {
         if (resp === 1) {
