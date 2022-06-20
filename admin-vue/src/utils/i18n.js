@@ -4,7 +4,7 @@ export default {
             translation: "translation"
         },
         login: {
-            title: "后台管理系统",
+            title: "数据监控系统",
             submit: "登录",
             placeholder: {
               username: "用户名",
@@ -21,7 +21,7 @@ export default {
             }
         },
         header: {
-            title: "后台管理系统"
+            title: "数据监控系统"
         }
     },
     "en": {
@@ -29,7 +29,7 @@ export default {
             translation: "翻译"
         },
         login: {
-            title: "Background management system",
+            title: "Data monitoring System",
             submit: "login",
             placeholder: {
                 username: "username",
@@ -46,7 +46,7 @@ export default {
             }
         },
         header: {
-            title: "Background management system"
+            title: "Data monitoring System"
         }
     }
 }
